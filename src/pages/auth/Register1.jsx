@@ -39,11 +39,15 @@ function Register1() {
         {/* Form */}
         <form onSubmit={handleSubmit(hdlSubmit)}>
           <div className="flex flex-col gap-2 py-4">
-            <FormInput register={register} name="email" />
-            <FormInput register={register} name="firstname" />
-            <FormInput register={register} name="lastname" />
-            <FormInput register={register} name="password" />
-            <FormInput register={register} name="confirmPassword" />
+            <FormInput register={register} name="email" errors={errors} />
+            <FormInput register={register} name="firstname" errors={errors} />
+            <FormInput register={register} name="lastname" errors={errors} />
+            <FormInput register={register} name="password" errors={errors} />
+            <FormInput
+              register={register}
+              name="confirmPassword"
+              errors={errors}
+            />
           </div>
 
           <div className="flex justify-center">
