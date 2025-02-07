@@ -118,3 +118,20 @@ https://react-hook-form.com/
 ```bash
 npm install react-hook-form
 ```
+
+## Step 5 Icon
+
+https://lucide.dev/
+
+```bash
+npm i lucide-react
+```
+
+## Step 6 Validate with Zod
+
+https://github.com/react-hook-form/resolvers
+
+```bash
+npm install @hookform/resolvers
+npm i zod
+```
