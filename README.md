@@ -105,10 +105,16 @@ function AppRoutes() {
 export default AppRoutes;
 ```
 
-
-
-
 ## Step ? Sweetalert2
+
 ```bash
 npm install sweetalert2
+```
+
+## Step 4 React-Hook-form
+
+https://react-hook-form.com/
+
+```bash
+npm install react-hook-form
 ```
