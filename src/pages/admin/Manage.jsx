@@ -1,7 +1,13 @@
 import { useEffect, useState } from "react";
-import { actionListUsers } from "../../api/user";
+import {
+  actionDeleteUser,
+  actionListUsers,
+  actionUpdateRole,
+} from "../../api/user";
 import useAuthStore from "../../store/auth-store";
 import { Trash2 } from "lucide-react";
+import { createAlert } from "../../utils/createAlert";
+import Swal from "sweetalert2";
 
 // rfce
 function Manage() {
@@ -20,6 +26,43 @@ function Manage() {
     try {
       const res = await actionListUsers(token);
       setUsers(res.data.result);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const hdlUpdateRole = async (token, id, role) => {
+    // body func
+    console.log(token, id, role);
+    try {
+      const res = await actionUpdateRole(token, { id, role });
+      createAlert("success", "Uddate Role Success!!!");
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const hdlDeleteUser = async (token, id) => {
+    console.log(token, id);
+    try {
+      // code
+      Swal.fire({
+        icon: "info",
+        text: "Are you sure?",
+        // showDenyButton:true,
+        showCancelButton: true,
+        showCloseButton: true,
+      }).then(async (data) => {
+        console.log(data.isConfirmed);
+        if (data.isConfirmed) {
+          // true
+          const res = await actionDeleteUser(token, id);
+          console.log(res);
+          createAlert("success", "Delete Success!!");
+          hdlFetchUsers(token);
+        }
+      });
     } catch (error) {
       console.log(error);
     }
@@ -47,9 +90,24 @@ function Manage() {
                 <td>{item.firstname}</td>
                 <td>{item.lastname}</td>
                 <td>{item.email}</td>
-                <td>{item.role}</td>
                 <td>
-                  <Trash2 color="red"/>
+                  {/* Select */}
+                  <select
+                    onChange={(e) =>
+                      hdlUpdateRole(token, item.id, e.target.value)
+                    }
+                    defaultValue={item.role}
+                  >
+                    <option>USER</option>
+                    <option>ADMIN</option>
+                  </select>
+                  {/* /Select */}
+                </td>
+                <td>
+                  <Trash2
+                    onClick={() => hdlDeleteUser(token, item.id)}
+                    color="red"
+                  />
                 </td>
               </tr>
             );
