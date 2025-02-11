@@ -25,12 +25,19 @@ function AppRoutes() {
         </Route>
 
         {/* Private [USER] */}
-        <Route path="user" element={<Layout />}>
+        <Route 
+        path="user" 
+        element={<ProtectRoute el={<Layout />} allows={["USER"]} />}>
+
           <Route index element={<HomeUser />} />
         </Route>
 
         {/* Private [ADMIN] */}
-        <Route path="admin" element={<ProtectRoute el={<Layout/>} />}>
+        <Route
+          path="admin"
+          element={<ProtectRoute el={<Layout />} allows={["ADMIN"]} />}>
+
+
           <Route index element={<Dashboard />} />
           <Route path="manage" element={<Manage />} />
         </Route>

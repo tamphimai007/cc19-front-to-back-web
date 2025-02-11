@@ -3,7 +3,7 @@ import useAuthStore from "../store/auth-store";
 import { actionCurrentUser } from "../api/auth";
 
 // rfce
-function ProtectRoute({ el }) {
+function ProtectRoute({ el, allows }) {
   const [ok, setOk] = useState(null);
   //   console.log("Hello, Protect Route");
   //   const user = useAuthStore((state) => state.user);
@@ -21,8 +21,8 @@ function ProtectRoute({ el }) {
       const res = await actionCurrentUser(token);
       // Role from back-end
       const role = res.data.result.role;
-      console.log(role);
-      setOk(true);
+      //   console.log(role);
+      setOk(allows.includes(role));
     } catch (error) {
       console.log(error);
       setOk(false);
