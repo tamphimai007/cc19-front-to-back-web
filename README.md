@@ -135,3 +135,9 @@ https://github.com/react-hook-form/resolvers
 npm install @hookform/resolvers
 npm i zod
 ```
+
+## Step 7 Global State with Zustand
+
+```bash
+npm install zustand
+```
