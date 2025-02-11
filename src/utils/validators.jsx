@@ -12,3 +12,8 @@ export const registerSchema = z
     message: "Confirm Password ไม่ตรงกัน",
     path: ["confirmPassword"],
   });
+
+export const loginSchema = z.object({
+  email: z.string().email("Email ไม่ถูกต้อง"),
+  password: z.string().min(6, "Password ต้องมากกว่า 6 อักขระ"),
+});
