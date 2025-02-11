@@ -17,8 +17,11 @@ const authStore = (set) => ({
       return { success: false, error: error.response.data.message };
     }
   },
+  actionLogout: () => {
+    set({ user: [], token: null });
+  },
 });
 // Step 2 Exports Store
-const useAuthStore = create(persist(authStore,{name:'auth-store'}));
+const useAuthStore = create(persist(authStore, { name: "auth-store" }));
 
 export default useAuthStore;
